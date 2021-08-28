@@ -1,0 +1,26 @@
+version: "3.5"
+services:
+  hexagonal-architecture-python:
+    container_name: hexagonal-architecture-python
+    build: ./
+    ports:
+      - 5000:5000
+    volumes:
+      - ./:/home/app
+    networks:
+      - app_network
+
+  hexagonal-architecture-mongodb:
+    container_name: hexagonal-architecture-mongodb
+    image: mongo
+    environment: 
+      - MONGO_INITDB_DATABASE=${DB_DATABASE}
+    ports:
+      - ${DB_PORT}:27017
+    volumes:
+      - ./data/db:/data/db
+    networks:
+      - app_network
+networks:
+  app_network:
+    driver: bridge
