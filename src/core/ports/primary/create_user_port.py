@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import dataclasses as dc
-from typing import Dict
+from typing import Dict, Tuple
 
 @dc.dataclass(unsafe_hash=True)
 class CreateUserParams:
@@ -13,5 +13,5 @@ class CreateUserParams:
 
 class CreateUserPort(ABC):
     @abstractmethod
-    def create(self, params: CreateUserParams) -> Dict:
+    def create(self, params: CreateUserParams) -> Tuple[Dict, bool]:
         raise Exception('Method not implemented')

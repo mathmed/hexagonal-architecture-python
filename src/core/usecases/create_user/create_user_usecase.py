@@ -1,6 +1,6 @@
 from src.core.ports.primary import CreateUserPort, CreateUserParams
 from src.core.contracts import UserRepositoryContract, SaveUserParams, HashContract
-from typing import Dict
+from typing import Dict, Tuple
 
 class CreateUserUsecase(CreateUserPort):
 
@@ -12,13 +12,13 @@ class CreateUserUsecase(CreateUserPort):
         self.user_repository = user_repository
         self.hash_service = hash_service
 
-    def create(self, params: CreateUserParams) -> Dict:
+    def create(self, params: CreateUserParams) -> Tuple[Dict, bool]:
         
         username_exists = self.user_repository.get('username', params.username, False)
         email_exists = self.user_repository.get('email', params.email, False)
 
         if username_exists or email_exists:
-            return 'User already exists'
+            return {'message': 'User already exists'}, False
 
         hashed_password = self.hash_service.encode(params.password)
 
@@ -34,4 +34,4 @@ class CreateUserUsecase(CreateUserPort):
         )
 
         del saved_user.password
-        return saved_user.__dict__
+        return {'user': saved_user.__dict__}, True
