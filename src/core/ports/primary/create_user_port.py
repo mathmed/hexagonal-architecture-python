@@ -7,6 +7,9 @@ class CreateUserParams:
     username: str
     password: str
     name: str
+    email: str
+    profile_image_url: str = None
+    bio: str = None
 
 class CreateUserPort(ABC):
     @abstractmethod
