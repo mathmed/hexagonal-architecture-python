@@ -14,7 +14,7 @@ class SaveUserParams:
 
 class UserRepositoryContract(ABC):
     @abstractmethod
-    def save(self, params: SaveUserParams) -> Dict:
+    def save(self, params: SaveUserParams) -> UserModel:
         raise Exception('Method not implemented')
 
     def get(self, by: str, value: any, raise_error: bool = True) -> UserModel:
