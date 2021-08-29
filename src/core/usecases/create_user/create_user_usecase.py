@@ -5,12 +5,19 @@ class CreateUserUsecase(CreateUserPort):
 
     def __init__(
         self,
-        save_user: UserRepositoryContract
+        user_repository: UserRepositoryContract
     ):
-        self.save_user = save_user
+        self.user_repository = user_repository
 
     def create(self, params: CreateUserParams) -> str:
-        saved_user = self.save_user.save(
+
+        username_exists = self.user_repository.get('username', params.username, False)
+        email_exists = self.user_repository.get('email', params.email, False)
+
+        if username_exists or email_exists:
+            return 'User already exists'
+
+        saved_user = self.user_repository.save(
             SaveUserParams(
                 params.username,
                 params.password,
