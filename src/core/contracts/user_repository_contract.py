@@ -1,3 +1,4 @@
+from src.core.models import UserModel
 from abc import ABC, abstractmethod
 from typing import Dict
 import dataclasses as dc
@@ -14,4 +15,7 @@ class SaveUserParams:
 class UserRepositoryContract(ABC):
     @abstractmethod
     def save(self, params: SaveUserParams) -> Dict:
+        raise Exception('Method not implemented')
+
+    def get(self, by: str, value: any, raise_error: bool = True) -> UserModel:
         raise Exception('Method not implemented')
