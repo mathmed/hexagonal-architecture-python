@@ -1,5 +1,5 @@
-from src.core.ports.primary import CreateUserParams
-from src.presentation.factories import create_user_factory
+from src.core.ports.primary import CreateUserParams, SigninParams
+from src.presentation.factories import create_user_factory, signin_factory
 from src.presentation.validators import HttpGenericValidator
 from src.presentation.helpers.http_status_code import *
 from traceback import format_exc
@@ -18,7 +18,7 @@ def create_user():
         if not is_valid_request:
             return jsonify({'message': message}), BAD_REQUEST
 
-        response = usecase.create(
+        response, success = usecase.create(
             CreateUserParams(
                 body['username'],
                 body['password'],
@@ -29,7 +29,31 @@ def create_user():
             )
         )
     
-        return jsonify({'data': response}), CREATED
+        return jsonify(response), CREATED if success else BAD_REQUEST
+
+    except Exception:
+        print(format_exc(), flush=True)
+        return jsonify({'message': 'Internal server error'}), INTERNAL_SERVER_ERROR
+
+
+@api_routes.route('/api/user/signin', methods=['POST'])
+def signin():
+    try:
+        usecase = signin_factory()
+        body = request.json
+        required_fields = ['username', 'password']
+        is_valid_request, message = HttpGenericValidator.validate(required_fields, body)
+        if not is_valid_request:
+            return jsonify({'message': message}), BAD_REQUEST
+
+        response, success = usecase.signin(
+            SigninParams(
+                body['username'],
+                body['password']
+            )
+        )
+    
+        return jsonify(response), OK if success else BAD_REQUEST
 
     except Exception:
         print(format_exc(), flush=True)
