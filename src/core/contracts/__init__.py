@@ -1,1 +1,2 @@
 from .user_repository_contract import SaveUserParams, UserRepositoryContract
+from .hash_contract import HashContract
