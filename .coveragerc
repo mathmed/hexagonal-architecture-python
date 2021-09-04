@@ -1,0 +1,13 @@
+[run]
+omit = 
+    src/tests/*
+    *_mock.py
+    *__init__.py
+    *_contract.py
+    *_port.py
+    *_adapter.py
+    *_factory.py
+    */main.py
+    *_test.py
+    */entities/*
+    */config.py
