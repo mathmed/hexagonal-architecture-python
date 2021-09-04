@@ -20,12 +20,12 @@ def create_user():
 
         response, success = usecase.create(
             CreateUserParams(
-                body['username'],
-                body['password'],
-                body['name'],
-                body['email'],
-                body['profile_image_url'] if 'profile_image_url' in body else None,
-                body['bio'] if 'bio' in body else None
+                str(body['username']),
+                str(body['password']),
+                str(body['name']),
+                str(body['email']),
+                str(body['profile_image_url']) if 'profile_image_url' in body else None,
+                str(body['bio']) if 'bio' in body else None
             )
         )
     
@@ -48,8 +48,8 @@ def signin():
 
         response, success = usecase.signin(
             SigninParams(
-                body['username'],
-                body['password']
+                str(body['username']),
+                str(body['password'])
             )
         )
     
