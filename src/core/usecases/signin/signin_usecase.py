@@ -25,4 +25,4 @@ class SigninUsecase(SigninPort):
             return {'user': user.__dict__}, True
 
         except UserNotFoundError:
-            return {'message': 'Username/password invalid'}, True
+            return {'message': 'Username/password invalid'}, False
