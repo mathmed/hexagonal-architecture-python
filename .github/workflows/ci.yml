@@ -46,7 +46,7 @@ jobs:
           pytest
       - name: Test Coverage with pytest
         run: |
-          pytest -ignore=src/presentation --cov-config=.coveragerc --cov-report=xml --cov=. src/
+          pytest --ignore=src/presentation --cov-config=.coveragerc --cov-report=xml --cov=. src/
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
