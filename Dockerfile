@@ -1,10 +1,10 @@
 FROM python:3.9
 
-COPY . /app
+COPY . /src
 
-WORKDIR /app
+WORKDIR /src
 
-RUN pip install -r app/requirements.txt
+RUN pip install -r src/requirements.txt
 
 EXPOSE 80
 
