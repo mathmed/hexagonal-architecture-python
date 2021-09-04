@@ -4,7 +4,7 @@ services:
     container_name: hexagonal-architecture-python
     build: ./
     ports:
-      - 5000:5000
+      - ${APP_PORT}:5000
     volumes:
       - ./:/home/app
     networks:
@@ -13,7 +13,7 @@ services:
   hexagonal-architecture-mongodb:
     container_name: hexagonal-architecture-mongodb
     image: mongo
-    environment: 
+    environment:
       - MONGO_INITDB_DATABASE=${DB_DATABASE}
     ports:
       - ${DB_PORT}:27017
