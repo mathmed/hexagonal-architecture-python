@@ -8,5 +8,5 @@ app = Flask(__name__)
 def main():
     CORS(app)
     app.register_blueprint(api_routes)
-    app.run(host='0.0.0.0', port=os.getenv('APP_PORT'))
+    app.run(host='0.0.0.0', port=os.getenv('APP_PORT') or 3000)
 
