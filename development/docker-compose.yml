@@ -6,7 +6,7 @@ services:
     ports:
       - ${APP_PORT}:5000
     volumes:
-      - ./:/home/app
+      - ../:/home/app
     networks:
       - app_network
 
@@ -18,7 +18,7 @@ services:
     ports:
       - ${DB_PORT}:27017
     volumes:
-      - ./data/db:/data/db
+      - ../data/db:/data/db
     networks:
       - app_network
 networks:
